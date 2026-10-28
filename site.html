@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eglence Kutusu</title>
+    <style>
+        body {
+            background-color: #000000;
+            color: #00FF00;
+            font-family: monospace;
+            padding: 5px;
+            margin: 0;
+            font-size: 14px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #FFFF00;
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .menu-item {
+            display: block;
+            background-color: #222222;
+            color: #FFFFFF;
+            padding: 8px;
+            margin: 5px 0;
+            text-decoration: none;
+            border: 1px solid #444444;
+            text-align: center;
+        }
+        .menu-item:focus, .menu-item:active {
+            background-color: #00FF00;
+            color: #000000;
+            font-weight: bold;
+        }
+        .box {
+            border: 1px dashed #00FF00;
+            padding: 8px;
+            margin: 8px 0;
+            background-color: #111111;
+        }
+        .btn {
+            background-color: #333333;
+            color: #FFFF00;
+            border: 1px solid #666666;
+            padding: 5px 10px;
+            margin: 2px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn:focus {
+            background-color: #FFFF00;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>--- ANA MENU ---</h1>
+    <p style="text-align:center; font-size:11px;">[Yon tuslari ile menude gezinin]</p>
+
+    <!-- 1. MUZIK CALAR BOLUMU -->
+    <div class="box">
+        <h2> Muzik Calar</h2>
+        <p style="font-size:12px; text-align:center;">Asagidaki listeden bir sarki secin:</p>
+        
+        <a class="menu-item" href="https://soundhelix.com">> Sarki 1 (Synth/Pop)</a>
+        <a class="menu-item" href="https://soundhelix.com">> Sarki 2 (Chill)</a>
+        <a class="menu-item" href="https://soundhelix.com">> Sarki 3 (Tekno)</a>
+        
+        <p style="font-size:11px; color:#888888; text-align:center;">Not: Linklere tikladiginizda telefon sarkiyi indirebilir veya oynatabilir.</p>
+    </div>
+
+    <!-- 2. FAL / SOZ BOLUMU -->
+    <div class="box" style="text-align: center;">
+        <h2> Gunun Fali / Sozu</h2>
+        <p id="soz-ekrani">"Menuden 'Soz Degistir' butonuna basarak gunun sansini gor!"</p>
+        <button class="btn" onclick="sozGetir()"> Soz Degistir</button>
+    </div>
+
+    <!-- 3. MINI OYUN -->
+    <div class="box" style="text-align: center;">
+        <h2> Sayi Bulmaca</h2>
+        <p style="font-size:12px;">1-10 arasi sayiyi tahmin edin:</p>
+        <button class="btn" onclick="tahminEt(1)">1</button>
+        <button class="btn" onclick="tahminEt(2)">2</button>
+        <button class="btn" onclick="tahminEt(3)">3</button>
+        <button class="btn" onclick="tahminEt(4)">4</button>
+        <button class="btn" onclick="tahminEt(5)">5</button>
+        <button class="btn" onclick="tahminEt(6)">6</button>
+        <button class="btn" onclick="tahminEt(7)">7</button>
+        <button class="btn" onclick="tahminEt(8)">8</button>
+        <button class="btn" onclick="tahminEt(9)">9</button>
+        <button class="btn" onclick="tahminEt(10)">10</button>
+        <p id="oyun-sonuc" style="color:#FFFF00; font-weight:bold;"></p>
+    </div>
+
+    <!-- 4. SAYAC -->
+    <div class="box" style="text-align: center;">
+        <h2> Sayac</h2>
+        <p id="sayac-skor" style="font-size:20px; margin:5px;">0</p>
+        <button class="btn" onclick="arttir()">[+] Arttir</button>
+        <button class="btn" onclick="sifirla()">[R] Sifirla</button>
+    </div>
+
+    <p style="text-align:center; font-size:10px; color:#666666;">Hiking X9 Retro Edition v1.1</p>
+
+    <script>
+        // Ingilizce karakterli rastgele sozler
+        var sozler = [
+            "Bugun sansli gunundesin, harika bir sey olacak!",
+            "Eski telefonların karizmasi kimsede yok, unutma.",
+            "Cebindeki telefon bir klasik, degerini bil.",
+            "Cok yakinda guzel bir haber alacaksin.",
+            "Bugun sabirli olman gereken bir gun, acele etme."
+        ];
+
+        function sozGetir() {
+            var rastgeleIndeks = Math.floor(Math.random() * sozler.length);
+            document.getElementById('soz-ekrani').innerHTML = '"' + sozler[rastgeleIndeks] + '"';
+        }
+
+        var gizliSayi = Math.floor(Math.random() * 10) + 1;
+        function tahminEt(sayi) {
+            var sonucEkrani = document.getElementById('oyun-sonuc');
+            if(sayi === gizliSayi) {
+                sonucEkrani.innerHTML = "TEBRIKLER! Bildiniz";
+                gizliSayi = Math.floor(Math.random() * 10) + 1;
+            } else {
+                sonucEkrani.innerHTML = "Yeniden dene! " + (sayi > gizliSayi ? "Daha kucuk" : "Daha buyuk");
+            }
+        }
+
+        var sayac = 0;
+        function arttir() {
+            sayac++;
+            document.getElementById('sayac-skor').innerHTML = sayac;
+        }
+        function sifirla() {
+            sayac = 0;
+            document.getElementById('sayac-skor').innerHTML = sayac;
+        }
+    </script>
+</body>
+</html>
